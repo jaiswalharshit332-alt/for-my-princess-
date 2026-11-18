@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Princess Day 👑</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; background: linear-gradient(135deg, #ff758c, #ff7eb3, #fecfef); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 10px; color: #4a154b; }
+  .bg { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+  .f { position: absolute; top: -30px; animation: fall linear infinite; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+  .card { position: relative; z-index: 5; background: #fff; padding: 20px 16px; border-radius: 24px; box-shadow: 0 15px 40px rgba(194,24,91,0.3); max-width: 420px; width: 100%; border: 4px solid #ff69b4; text-align: center; }
+  input.r { display: none; }
+  .pg { display: none; }
+  #s1:checked~.p1, #s2:checked~.p2, #s3:checked~.p3, #s4:checked~.p4, #s5:checked~.p5, #s6:checked~.p6, #s7:checked~.p7 { display: block; animation: pop 0.35s ease; }
+  @keyframes pop { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  .bar { height: 7px; background: #ffe4ec; border-radius: 10px; margin-bottom: 15px; overflow: hidden; }
+  .fill { height: 100%; background: linear-gradient(90deg, #ff4b8b, #ffd700); transition: 0.3s; }
+  #s1:checked~.bar .fill { width: 14%; } #s2:checked~.bar .fill { width: 28%; } #s3:checked~.bar .fill { width: 42%; } #s4:checked~.bar .fill { width: 56%; } #s5:checked~.bar .fill { width: 70%; } #s6:checked~.bar .fill { width: 85%; } #s7:checked~.bar .fill { width: 100%; }
+  .em { font-size: 48px; margin-bottom: 8px; }
+  h1 { color: #d63384; font-size: 20px; margin-bottom: 10px; }
+  p { font-size: 14px; line-height: 1.5; color: #444; margin-bottom: 14px; }
+  .box { background: #fff0f6; border-left: 4px solid #ff4b8b; padding: 10px; border-radius: 8px; font-size: 13px; color: #880e4f; margin-bottom: 14px; font-style: italic; }
+  .pbox { position: relative; width: 190px; height: 200px; margin: 0 auto 12px; border-radius: 16px; padding: 4px; background: linear-gradient(45deg, #ff4b8b, #ffd700); }
+  .pbox img { width: 100%; height: 100%; object-fit: cover; border-radius: 13px; background: #ffe4ec; }
+  .bdg { position: absolute; top: -8px; right: -8px; background: #ffd700; color: #4a154b; font-weight: bold; font-size: 11px; padding: 3px 9px; border-radius: 15px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px; }
+  .tbtn { background: #fff0f6; border: 2px solid #ffb6c1; padding: 9px 5px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: bold; color: #ad1457; }
+  #t1:checked~.p6 label[for="t1"], #t2:checked~.p6 label[for="t2"], #t3:checked~.p6 label[for="t3"], #t4:checked~.p6 label[for="t4"] { background: #ff4b8b; color: #fff; border-color: #d63384; }
+  .res { display: none; background: #fff0f6; border: 1px dashed #ff4b8b; color: #c2185b; font-size: 12px; font-weight: bold; padding: 5px 10px; border-radius: 8px; margin-bottom: 10px; }
+  #t1:checked~.p7 .r1, #t2:checked~.p7 .r2, #t3:checked~.p7 .r3, #t4:checked~.p7 .r4 { display: inline-block; }
+  .btn { display: inline-block; background: linear-gradient(45deg, #ff4b8b, #ff758c); color: #fff; padding: 11px 22px; font-size: 14px; font-weight: bold; border-radius: 40px; cursor: pointer; box-shadow: 0 4px 12px rgba(255,75,139,0.4); }
+  .no { background: #e0e0e0; color: #333; box-shadow: none; margin-left: 8px; transition: 0.15s; }
+  .cert { border: 4px double #d4af37; background: #fffdf5; padding: 14px 10px; border-radius: 15px; margin-bottom: 12px; }
+  .ctitle { font-family: Georgia, serif; color: #b8860b; font-size: 16px; font-weight: bold; }
+  .cname { font-family: Georgia, serif; font-style: italic; font-size: 24px; font-weight: bold; color: #d63384; border-bottom: 2px solid #d4af37; display: inline-block; padding: 2px 15px; margin: 6px 0 8px; }
+  .ctext { font-size: 12.5px; line-height: 1.5; color: #333; text-align: justify; margin-bottom: 10px; }
+  .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-bottom: 10px; }
+  .tag { background: #ffe4e1; color: #c2185b; font-size: 10.5px; font-weight: bold; padding: 3px 7px; border-radius: 8px; }
+  .cfoot { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #d4af37; padding-top: 8px; font-size: 10.5px; color: #555; }
+  .seal { width: 44px; height: 44px; background: #ffd700; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #4a154b; font-weight: bold; font-size: 8.5px; border: 2px dashed #fff; }
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="card">
+  <input type="radio" name="p" id="s1" class="r" checked><input type="radio" name="p" id="s2" class="r"><input type="radio" name="p" id="s3" class="r"><input type="radio" name="p" id="s4" class="r"><input type="radio" name="p" id="s5" class="r"><input type="radio" name="p" id="s6" class="r"><input type="radio" name="p" id="s7" class="r">
+  <input type="radio" name="t" id="t1" class="r" checked><input type="radio" name="t" id="t2" class="r"><input type="radio" name="t" id="t3" class="r"><input type="radio" name="t" id="t4" class="r">
+  <div class="bar"><div class="fill"></div></div>
+
+  <div class="pg p1">
+    <div class="em">👑😜✨</div>
+    <h1>रुकिए जरा! आज कौन सा दिन है?</h1>
+    <p>शाही सूत्रों से पता चला है कि आज <b>National Princess Day</b> है! क्या आप मानती हैं कि आप दुनिया की सबसे क्यूट (और थोड़ी सी नौटंकीबाज) प्रिंसेस हैं?</p>
+    <label for="s2" class="btn">हाँ, बिल्कुल हूँ! 💁‍♀️✨</label><span class="btn no" id="nb" onmouseover="mv()">नहीं 🙈</span>
+  </div>
+
+  <div class="pg p2">
+    <div class="em">👸💅😂</div>
+    <h1>मुझे पता था आप यही चुनेंगी!</h1>
+    <p>वैसे भी 'नहीं' वाला बटन काम करने वाला नहीं था। सच तो यह है कि बिना ताज के भी आपके नखरे किसी महारानी से कम नहीं हैं!</p>
+    <div class="box">"शाही चेतावनी: भूख लगने पर या बात न मानने पर इनका पारा 100°C तक जा सकता है!" 🌶️🔥</div>
+    <label for="s3" class="btn">आगे सबूत देखें 📸➡️</label>
+  </div>
+
+  <div class="pg p3">
+    <h1>सबूत 1: रॉयल अदा ✨</h1>
+    <div class="pbox"><span class="bdg">1 / 3 📸</span><img src="photo1.jpeg" alt="Photo 1"></div>
+    <p>इस तस्वीर को देखकर तो कैमरा भी शरमा गया होगा! आपकी सादगी और स्टाइल का कोई मुकाबला नहीं है। 😍</p>
+    <label for="s4" class="btn">अगली फोटो ➡️</label>
+  </div>
+
+  <div class="pg p4">
+    <h1>सबूत 2: कातिल मुस्कान 😊</h1>
+    <div class="pbox"><span class="bdg">2 / 3 💖</span><img src="photo2.jpeg" alt="Photo 2"></div>
+    <p>जब आप मुस्कुराती हैं, तो सारी टेंशन गायब हो जाती है। बस ऐसे ही हमेशा हंसती रहिए (भले ही खुद के जोक्स पर)! 😂💕</p>
+    <label for="s5" class="btn">तीसरी फोटो ➡️</label>
+  </div>
+
+  <div class="pg p5">
+    <h1>सबूत 3: प्योर मैजिक 🌟</h1>
+    <div class="pbox"><span class="bdg">3 / 3 👑</span><img src="photo3.jpeg" alt="Photo 3"></div>
+    <p>सारे सबूत देखने के बाद यह पक्का हो गया है कि आप ही असली प्रिंसेस हैं। अब अपना शाही इनाम चुनिए! 🎁</p>
+    <label for="s6" class="btn">इनाम चुनें 🍫➡️</label>
+  </div>
+
+  <div class="pg p6">
+    <div class="em">🎁👑😋</div>
+    <h1>प्रिंसेस का खास फरमान!</h1>
+    <p>सर्टिफिकेट के साथ आपको कौन सी ट्रीट चाहिए?</p>
+    <div class="grid">
+      <label for="t1" class="tbtn">🍫 ढेर सारी चॉकलेट</label>
+      <label for="t2" class="tbtn">🍨 आइसक्रीम पार्टी</label>
+      <label for="t3" class="tbtn">🍕 मनपसंद खाना</label>
+      <label for="t4" class="tbtn">🎁 सरप्राइज गिफ्ट</label>
+    </div>
+    <label for="s7" class="btn">रॉयल सर्टिफिकेट देखें 🏆</label>
+  </div>
+
+  <div class="pg p7">
+    <div class="cert">
+      <div style="font-size:24px;">👑📜✨</div>
+      <div class="ctitle">ROYAL PRINCESS CERTIFICATE</div>
+      <p style="font-size:11px;margin-bottom:2px;">यह शाही फरमान प्रमाणित करता है कि</p>
+      <div class="cname">My Dear Princess</div>
+      <div class="ctext">को आधिकारिक तौर पर <b>"दुनिया की सबसे प्यारी, अनोखी और नंबर-1 प्रिंसेस"</b> घोषित किया जाता है। अपनी जादुई मुस्कान, मासूम शरारतों, थोड़े से गुस्से और बेइंतहा प्यार से इन्होंने सबका दिल जीत लिया है। आज से इन्हें बिना किसी शर्त के हमेशा खुश रहने, नखरे दिखाने और ढेर सारा प्यार पाने का पूरा शाही अधिकार दिया जाता है।</div>
+      <div class="res r1">🎁 शाही इनाम: ढेर सारी चॉकलेट 🍫</div>
+      <div class="res r2">🎁 शाही इनाम: आइसक्रीम पार्टी 🍨</div>
+      <div class="res r3">🎁 शाही इनाम: मनपसंद खाना 🍕</div>
+      <div class="res r4">🎁 शाही इनाम: प्यारा सरप्राइज गिफ्ट 🎁</div>
+      <div class="tags"><span class="tag">✨ 100% क्यूटनेस</span><span class="tag">👑 रॉयल एटीट्यूड</span><span class="tag">💖 गोल्डन हार्ट</span><span class="tag">😂 ड्रामा क्वीन</span></div>
+      <div class="cfoot">
+        <div style="text-align:left;"><b>तारीख:</b><br>Princess Day</div>
+        <div class="seal">ROYAL<br>VERIFIED</div>
+        <div style="text-align:right;"><b>हस्ताक्षर:</b><br><i>आपका सबसे बड़ा फैन</i></div>
+      </div>
+    </div>
+    <label for="s1" class="btn">फिर से देखें 🔄</label>
+  </div>
+</div>
+<script>
+  const bg = document.getElementById('bg');
+  ['👑','💖','✨','🌸','🦋'].forEach(ic => {
+    for(let i=0;i<5;i++){
+      let d=document.createElement('div'); d.className='f'; d.innerText=ic;
+      d.style.left=Math.random()*100+'vw'; d.style.animationDuration=(Math.random()*4+4)+'s';
+      d.style.fontSize=(Math.random()*10+16)+'px'; bg.appendChild(d);
+    }
+  });
+  function mv(){ let b=document.getElementById('nb'); b.style.transform='translate('+(Math.random()*120-60)+'px,'+(Math.random()*120-60)+'px)'; }
+</script>
+</body>
+</html>
